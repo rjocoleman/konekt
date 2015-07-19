@@ -23,8 +23,9 @@ module Konekt
     alias_method :raise_exceptions?, :raise_exceptions
 
     def initialize
-      @mount_point = '/konekt_processor'
-      @auth_token = ENV['KONEKT_WEBHOOK_KEY']
+      @mount_point      = '/konekt_processor'
+      @logger           = Logger.new STDOUT
+      @auth_token       = ENV['KONEKT_WEBHOOK_KEY']
       @raise_exceptions = true unless ENV['RACK_ENV'] == 'production'
     end
 
