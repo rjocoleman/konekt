@@ -1,8 +1,14 @@
 # Konekt
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/konekt`. To experiment with that code, run `bin/console` for an interactive prompt.
+A Ruby (and optionally Rails) library to interact with the Konekt cloud.
 
-TODO: Delete this and the text above, and describe your gem
+Current features:
+
+* Webhook to receive messages - "Custom Webhook Url (your own App)"
+  * Automatic authentication to webhook key
+  * Decodes payload JSON
+  * Decodes data base64
+  * Basically, all data passed in to Konekt is passed out as an easy to consume object - per tag, where ever in your app you wish to subscribe.
 
 ## Installation
 
@@ -14,15 +20,53 @@ gem 'konekt'
 
 And then execute:
 
-    $ bundle
+`$ bundle`
 
 Or install it yourself as:
 
-    $ gem install konekt
+`$ gem install konekt`
 
-## Usage
+#### Setup
 
-TODO: Write usage instructions here
+The endpoint defaults to '/konekt_processor'. If you're app is at `https://example.com/` then you should set your webhook URL in Konekt to `https://example.com/konekt_processor`
+
+`ENV['KONEKT_WEBHOOK_KEY']` should be set to to the "Webhook Key" value from the Konekt _applcation_ for this webhook.
+
+Or you can override these in configuration:
+
+```ruby
+  # In an appropriate initializer
+  Konekt.configure do |config|
+    config.mount_point = '/some/other/path'
+    config.auth_token = ENV['KONEKT_WEBHOOK_KEY']
+  end
+```
+
+__Rack/Sinatra:__
+
+```ruby
+  # config.ru
+  require 'konekt/middleware'
+  use Konekt::Middleware
+```
+
+__Rails:__ This middleware is registered automatically.
+
+
+### Subscribing to Tags
+
+Subscribe to the tags you care about:
+
+```ruby
+Konekt.subscribe 'parcel_shipped' do |event|
+  puts event
+  # Do something with event
+  # You probably want to fire a background task
+end
+```
+
+In Rails this could live at `config/initalizers/konekt.rb`
+
 
 ## Development
 
