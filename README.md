@@ -1,5 +1,7 @@
 # Konekt
 
+[![Build Status](https://travis-ci.org/rjocoleman/konekt.svg)](https://travis-ci.org/rjocoleman/konekt)[![Gem Version](https://badge.fury.io/rb/konekt.svg)](http://badge.fury.io/rb/konekt)
+
 A Ruby (and optionally Rails) library to interact with the Konekt cloud.
 
 Current features:
@@ -68,11 +70,9 @@ end
 In Rails this could live at `config/initalizers/konekt.rb`
 
 
-## Development
+## Problems?
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release` to create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+This is pretty new and Konekt is pretty new too. Please raise issues or send PRs!
 
 ## Contributing
 
