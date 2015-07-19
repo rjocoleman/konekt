@@ -1,3 +1,2 @@
 require 'konekt/version'
-
-module Konekt; end
+require 'konekt/configuration'
